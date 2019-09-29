@@ -1,0 +1,82 @@
+syntax on
+filetype plugin indent on
+set background=dark
+set t_Co=256
+colorscheme molokai
+
+" set mouse=a
+set nu
+set hlsearch
+set expandtab
+set syntax=on
+set tabstop=4
+set shiftwidth=4
+set smarttab
+set smartindent
+set showmatch
+set matchtime=0
+set report=0
+:inoremap ( ()<ESC>i
+:inoremap ) <c-r>=ClosePair(')')<CR>
+:inoremap { {}<ESC>i
+:inoremap {<CR> {<CR>}<ESC>O
+:inoremap } <c-r>=ClosePair('}')<CR>
+:inoremap [ []<ESC>i
+:inoremap ] <c-r>=ClosePair(']')<CR>
+function ClosePair(char)
+    if getline('.')[col('.') - 1] == a:char
+        return "\<Right>"
+    else
+        return a:char
+    endif
+endfunction
+
+" 保存时自动格式化代码, 针对所有支持的文件
+au BufWrite * :Autoformat
+
+" 自动格式化python代码
+" au BufWrite *.py :Autoformat
+
+" 安装了yapf以后, 代码风格默认情况下是pep8，还可以选择google,facebook和chromium
+" let g:formatter_yapf_style = 'pep8'
+
+let g:formatdef_allman = '"astyle --style=allman --pad-oper"'
+
+" 显示错误详情
+" let g:autoformat_verbosemode=1
+
+
+" plugin
+"   ├── autoformat.vim
+"   ├── defaults.vim
+"   └── utils.vim
+
+" 设置文件头
+func SetInfo()
+    call setline(2, "File Name   : ".expand("%"))
+    call setline(3, "Created on  : ".strftime("%Y/%m/%d"))
+    call setline(4, "Author      : spxcds")
+endfunc
+
+" 根据文件类型设置文件头
+func SetTitle()
+    if &filetype == 'cpp' || &filetype == 'c' || &filetype == 'java'
+        call setline(1, "/**")
+        call SetInfo()
+        call setline(5, "**/")
+        call setline(6, "")
+    endif
+
+    if &filetype == 'python'
+        call setline(1, "#!/usr/bin/env python")
+        call setline(2, "# -*- coding: utf-8 -*-")
+        call setline(3, "")
+        call setline(4, "# @File    : ".expand("%"))
+        call setline(5, "# @Time    : ".strftime("%Y/%m/%d"))
+        call setline(6, "# @Author  : spxcds")
+    endif
+    exe "normal! G"
+endfunc
+
+" 文件开始时, 添加文件头
+" autocmd BufNewFile *.c,*.cc,*.cpp,*.py,*.sh,*.java call SetTitle()

@@ -1,0 +1,31 @@
+# System-wide .profile for sh(1)
+
+if [ -x /usr/libexec/path_helper ]; then
+	eval `/usr/libexec/path_helper -s`
+fi
+
+if [ "${BASH-no}" != "no" ]; then
+	[ -r /etc/bashrc ] && . /etc/bashrc
+fi
+
+alias vi=vim
+alias tmux='tmux -2'
+alias ipython='python -m IPython'
+alias bpython='python -m bpython'
+
+
+alias scp="myscp"
+
+export GOROOT=/usr/local/go
+export GOPATH=/usr/local/GOPATH
+export SCALA_HOME=/usr/local/scala/bin/scala
+export SPARK_HOME=/usr/local/spark
+export JAVA_HOME=/Library/Java/Home
+export HADOOP_HOME=/usr/local/hadoop
+# export PROTOBUF_HOME=/usr/local/Cellar/protobuf/3.5.1_1
+export M2_HOME=/usr/local/maven
+
+
+export PATH=$M2_HOME/bin:$GOPATH/bin:$SCALA_HOME/bin:$SPARK_HOME/bin:$JAVA_HOME/bin:$HADOOP_HOME/bin:$PATH
+
+# export DYLD_LIBRARY_PATH=/usr/local/Cellar/protobuf/3.5.1_1/lib

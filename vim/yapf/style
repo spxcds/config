@@ -1,0 +1,5 @@
+[style]
+column_limit=120
+
+[pep8]
+column_limit=120
