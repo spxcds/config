@@ -7,7 +7,7 @@ colorscheme molokai
 " set mouse=a
 set nu
 set hlsearch
-set paste
+" set paste
 set expandtab
 set syntax=on
 set tabstop=4
