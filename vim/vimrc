@@ -18,6 +18,7 @@ set showmatch
 set matchtime=0
 set noswapfile
 set report=0
+set paste
 :inoremap ( ()<ESC>i
 :inoremap ) <c-r>=ClosePair(')')<CR>
 :inoremap { {}<ESC>i
