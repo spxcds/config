@@ -34,7 +34,18 @@ function ClosePair(char)
 endfunction
 
 " 保存时自动格式化代码, 针对所有支持的文件
-au BufWrite * :Autoformat
+" au BufWrite * :Autoformat
+
+
+" map to <Leader>cf in C++ code
+autocmd FileType c,cc,cpp,objc nnoremap <buffer><Leader>cf :<C-u>ClangFormat<CR>
+autocmd FileType c,cc,cpp,objc vnoremap <buffer><Leader>cf :ClangFormat<CR>
+" if you install vim-operator-user
+autocmd FileType c,cc,cpp,objc map <buffer><Leader>x <Plug>(operator-clang-format)
+" Toggle auto formatting:
+nmap <Leader>C :ClangFormatAutoToggle<CR>
+autocmd FileType c,cc,cpp,objc ClangFormatAutoEnable
+
 
 " 自动格式化python代码
 " au BufWrite *.py :Autoformat
